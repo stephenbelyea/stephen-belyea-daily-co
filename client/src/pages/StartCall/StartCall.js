@@ -9,17 +9,17 @@ export default function StartCall({ service }) {
   const [error, setError] = useState('');
 
   const onStartCall = async () => {
-    setLoading(true);
     setError('');
+    setLoading(true);
 
     try {
       const call = await service.startCall();
       history.push(`${ROUTES.JOIN_CALL}/${call.callId}`);
     } catch (error) {
       setError('Something went wrong with our call service.');
+      setLoading(false);
     }
 
-    setLoading(false);
   }
 
   return (
