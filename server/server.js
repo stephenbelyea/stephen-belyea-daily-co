@@ -1,6 +1,7 @@
 require('dotenv').config({ path: '../.env' });
 const axios = require("axios");
 const express = require('express');
+const cors = require('cors')
 
 const API_KEY = process.env.DAILY_API_KEY;
 const BASE_URL = process.env.DAILY_API_BASE_URL;
@@ -28,6 +29,7 @@ const apiHelper = async (method, url, data = {}) => {
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.get("/info", async (_, response) => {
   try {
