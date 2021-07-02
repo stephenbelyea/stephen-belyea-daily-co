@@ -8,10 +8,20 @@ You will need Git, Node.js, and NPM to pull, install, and run this project.
 
 ## Server
 
-Install and run the API locally:
+Install and run the Express API locally:
 
 ```
 cd server
+npm install
+npm start
+```
+
+## Client
+
+Install and run the React app locally:
+
+```
+cd client
 npm install
 npm start
 ```
