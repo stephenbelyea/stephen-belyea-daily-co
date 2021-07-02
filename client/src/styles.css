@@ -30,3 +30,23 @@ nav {
 .error {
   color: crimson;
 }
+
+table {
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+table thead th,
+table thead td {
+  text-align: left;
+}
+
+table th,
+table td {
+  padding: 0.75rem;
+}
+
+table tbody td {
+  border: solid 1px #ccc;
+}
