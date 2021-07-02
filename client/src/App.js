@@ -2,25 +2,37 @@ import React from "react";
 import {
   BrowserRouter,
   Switch,
-  Route
+  Route,
+  Link
 } from "react-router-dom";
 import { callService } from './services';
-import { StartCall, JoinCall } from './pages';
+import { StartCall, JoinCall, ListCalls, CallMetrics } from './pages';
 import { ROUTES } from "./constants";
+import Navigation from "./components/Navigation/Navigation";
 
-export default function App() {
+export default function App(props) {
+  console.log(props)
   return (
-    <BrowserRouter>
-      <main className="app">
-        <Switch>
-          <Route path={`${ROUTES.JOIN_CALL}/:callId`}>
-            <JoinCall />
-          </Route>
-          <Route path={ROUTES.START_CALL}>
-            <StartCall service={callService} />
-          </Route>
-        </Switch>
-      </main>
-    </BrowserRouter>
+    <div className="app">
+      <BrowserRouter>
+        <main>
+          <Switch>
+            <Route path={ROUTES.DASH_CALLS}>
+              <ListCalls service={callService} />
+            </Route>
+            <Route path={`${ROUTES.DASH_CALL_METRICS}/:callId`}>
+              <CallMetrics service={callService} />
+            </Route>
+            <Route path={`${ROUTES.JOIN_CALL}/:callId`}>
+              <JoinCall />
+            </Route>
+            <Route path={ROUTES.START_CALL}>
+              <StartCall service={callService} />
+            </Route>
+          </Switch>
+        </main>
+        <Navigation />
+      </BrowserRouter>
+    </div>
   );
 }
