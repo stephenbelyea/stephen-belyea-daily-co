@@ -14,7 +14,7 @@ export default function StartCall({ service }) {
 
     try {
       const call = await service.startCall();
-      history.push(`${ROUTES.JOIN_CALL}/${call.callId}`);
+      history.push(`${ROUTES.JOIN_CALL}/${call.room}`);
     } catch (error) {
       setError('Something went wrong with our call service.');
       setLoading(false);

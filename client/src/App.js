@@ -17,16 +17,16 @@ export default function App(props) {
       <BrowserRouter>
         <main>
           <Switch>
-            <Route path={ROUTES.DASH_CALLS}>
-              <ListCalls service={callService} />
-            </Route>
             <Route path={`${ROUTES.DASH_CALL_METRICS}/:callId`}>
               <CallMetrics service={callService} />
+            </Route>
+            <Route path={ROUTES.DASH_CALLS} exact>
+              <ListCalls service={callService} />
             </Route>
             <Route path={`${ROUTES.JOIN_CALL}/:callId`}>
               <JoinCall />
             </Route>
-            <Route path={ROUTES.START_CALL}>
+            <Route path={ROUTES.START_CALL} exact>
               <StartCall service={callService} />
             </Route>
           </Switch>

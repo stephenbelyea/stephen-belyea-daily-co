@@ -1,20 +1,5 @@
 import axios from 'axios';
 
-function mapStartCallData(data) {
-  return {
-    callId: data.name || ''
-  };
-}
-
-function mapAllCallsData({ data }) {
-  return data.map(call => ({
-    id: call.id,
-    room: call.room,
-    start: call.start_time * 1000,
-    length: Math.ceil(call.duration / 60)
-  }));
-}
-
 class CallService {
   constructor() {
     this.instance = axios.create({
@@ -22,10 +7,26 @@ class CallService {
     });
   }
 
+  mapStartCallData(data) {
+    return {
+      id: data.id,
+      room: data.name
+    };
+  }
+
+  mapAllCallsData({ data }) {
+    return data.map(call => ({
+      id: call.id,
+      room: call.room,
+      start: call.start_time * 1000,
+      length: Math.ceil(call.duration / 60)
+    }));
+  }
+
   async startCall() {
     try {
       const response = await this.instance.post('/rooms');
-      return mapStartCallData(response.data);
+      return this.mapStartCallData(response.data);
     } catch (error) {
       throw new Error(error);
     }
@@ -34,7 +35,7 @@ class CallService {
   async getAllCalls() {
     try {
       const response = await this.instance.get('/meetings');
-      return mapAllCallsData(response.data);
+      return this.mapAllCallsData(response.data);
     } catch (error) {
       throw new Error(error);
     }
